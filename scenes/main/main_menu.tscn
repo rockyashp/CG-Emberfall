@@ -1,0 +1,389 @@
+[gd_scene load_steps=9 format=3 uid="uid://mnmnu0199"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/upgrade_selection.tscn" id="2_upgmodal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.03, 0.06, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.1, 0.08, 0.13, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.58, 0.18, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shard_pill"]
+bg_color = Color(0.05, 0.1, 0.15, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.75, 0.95, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.14, 0.1, 0.17, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.48, 0.18, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.24, 0.15, 0.22, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.8, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(1, 0.5, 0.1, 0.25)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_keybadge"]
+bg_color = Color(0.16, 0.13, 0.2, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.5, 0.3, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -290.0
+offset_right = 260.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardPanel" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="InnerMargin" type="MarginContainer" parent="MarginContainer/CardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CardPanel/InnerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.72, 0.18, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 42
+text = "★ EMBERFALL ★"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.8, 0.75, 1)
+theme_override_font_sizes/font_size = 17
+text = "THE THREE TRIALS"
+horizontal_alignment = 1
+
+[node name="ShardsPill" type="PanelContainer" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_shard_pill")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer/ShardsPill"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="ShardsLabel" type="Label" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer/ShardsPill/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "💎 SANCTUARY SHARDS: 50"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="MenuButtons" type="VBoxContainer" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_font_sizes/font_size = 17
+text = "BEGIN THE TRIAL"
+
+[node name="UpgradesButton" type="Button" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_font_sizes/font_size = 15
+text = "SANCTUARY UPGRADES"
+
+[node name="ControlsButton" type="Button" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_font_sizes/font_size = 15
+text = "TRIAL CONTROLS"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer/MenuButtons"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_font_sizes/font_size = 15
+text = "ABANDON SANCTUARY"
+
+[node name="FooterLabel" type="Label" parent="MarginContainer/CardPanel/InnerMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.6, 0.7, 0.8)
+theme_override_font_sizes/font_size = 11
+text = "Crafted with Godot Engine • 3D Action Roguelike"
+horizontal_alignment = 1
+
+[node name="ControlsPanel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(620, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -240.0
+offset_right = 310.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="ControlsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="ControlsPanel/Margin/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.25, 1)
+theme_override_font_sizes/font_size = 24
+text = "★ TRIAL CONTROLS & BINDINGS ★"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="ControlsPanel/Margin/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.88, 1)
+theme_override_font_sizes/font_size = 13
+text = "Keyboard commands all character navigation; Mouse is dedicated strictly to attacks."
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ControlsPanel/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="ControlsPanel/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Key1" type="PanelContainer" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keybadge")
+
+[node name="Label" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer/Key1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ W, A, S, D ] / [ ARROWS ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc1" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Move & Dynamic Direction Facing"
+vertical_alignment = 1
+
+[node name="Key2" type="PanelContainer" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keybadge")
+
+[node name="Label" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer/Key2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ LEFT MOUSE CLICK ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc2" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Runeblade Strike (Attack Only)"
+vertical_alignment = 1
+
+[node name="Key3" type="PanelContainer" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keybadge")
+
+[node name="Label" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer/Key3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ SPACEBAR ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc3" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Dodge Roll / Dash (i-frames)"
+vertical_alignment = 1
+
+[node name="Key4" type="PanelContainer" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keybadge")
+
+[node name="Label" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer/Key4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ Q ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc4" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Ember Burst (Radial Shockwave)"
+vertical_alignment = 1
+
+[node name="Key5" type="PanelContainer" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keybadge")
+
+[node name="Label" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer/Key5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ E ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc5" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Interact (Chests & Exit Gates)"
+vertical_alignment = 1
+
+[node name="Key6" type="PanelContainer" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keybadge")
+
+[node name="Label" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer/Key6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ ESCAPE ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc6" type="Label" parent="ControlsPanel/Margin/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Pause Combat & Sanctuary Upgrades"
+vertical_alignment = 1
+
+[node name="CloseControlsButton" type="Button" parent="ControlsPanel/Margin/VBoxContainer"]
+custom_minimum_size = Vector2(180, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_font_sizes/font_size = 15
+text = "RETURN"
+
+[node name="UpgradeSelection" parent="." instance=ExtResource("2_upgmodal")]
+layout_mode = 1

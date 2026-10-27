@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://exitgt9812"]
+
+[ext_resource type="Script" path="res://scripts/levels/exit_gate.gd" id="1_gate"]
+[ext_resource type="PackedScene" path="res://assets/dungeon/wall_doorway.gltf" id="2_door"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
+size = Vector3(2.6, 3.2, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_portal"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 0.7, 0.2, 0.8)
+emission_enabled = true
+emission = Color(1, 0.5, 0.1, 1)
+emission_energy_multiplier = 4.0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_portal"]
+material = SubResource("StandardMaterial3D_portal")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Curve" id="Curve_portal"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="ExitGate" type="Area3D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_gate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shape = SubResource("BoxShape3D_gate")
+
+[node name="DoorModel" parent="." instance=ExtResource("2_door")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(0.8, 0.1, 0.1, 1)
+light_energy = 1.5
+omni_range = 5.0
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+emitting = false
+amount = 24
+lifetime = 1.0
+mesh = SubResource("QuadMesh_portal")
+emission_shape = 3
+emission_box_extents = Vector3(1, 1.4, 0.2)
+direction = Vector3(0, 1, 0)
+spread = 20.0
+gravity = Vector3(0, 2, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+scale_amount_curve = SubResource("Curve_portal")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+text = "[ SEALED - DEFEAT ALL FOES ]"
+font_size = 28
+outline_size = 6
+outline_modulate = Color(0.05, 0.02, 0.01, 1)
+modulate = Color(0.8, 0.2, 0.2, 1)

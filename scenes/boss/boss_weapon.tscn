@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bswpn99x"]
+
+[ext_resource type="ArrayMesh" path="res://assets/weapons/Sword_Golden.obj" id="1_goldsword"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gold"]
+metallic = 0.9
+roughness = 0.3
+albedo_color = Color(0.95, 0.75, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.3, 0.05, 1)
+emission_energy_multiplier = 1.2
+
+[node name="BossWeapon" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.35, 0, 0, 0, -1.53e-08, 0.35, 0, -0.35, -1.53e-08, 0, 0, 0.3)
+mesh = ExtResource("1_goldsword")
+surface_material_override/0 = SubResource("StandardMaterial3D_gold")

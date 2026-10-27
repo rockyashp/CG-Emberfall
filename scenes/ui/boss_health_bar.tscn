@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsshlthbr01"]
+
+[ext_resource type="Script" path="res://scripts/ui/boss_health_bar.gd" id="1_bossbar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.09, 0.06, 0.1, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.62, 0.18, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.12, 0.08, 0.09, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.22, 0.15, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
+bg_color = Color(0.92, 0.22, 0.1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Theme" id="Theme_boss"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_bg")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_fill")
+
+[node name="BossHealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = 24.0
+offset_right = 340.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme = SubResource("Theme_boss")
+script = ExtResource("1_bossbar")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TitleContainer" type="HBoxContainer" parent="PanelContainer/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/Margin/VBoxContainer/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_font_sizes/font_size = 15
+text = "THE ASHEN WARDEN — GUARDIAN OF THE FLAME"
+
+[node name="PhaseLabel" type="Label" parent="PanelContainer/Margin/VBoxContainer/TitleContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.25, 1)
+theme_override_font_sizes/font_size = 14
+text = "PHASE I"
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/Margin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+max_value = 380.0
+value = 380.0
+show_percentage = false

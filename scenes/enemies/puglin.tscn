@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://puglinm02"]
+
+[ext_resource type="Script" path="res://scripts/enemies/puglin_enemy.gd" id="1_puglin"]
+[ext_resource type="PackedScene" path="res://assets/characters/Zombie_Male.gltf" id="2_zombie"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pug"]
+radius = 0.5
+height = 2.0
+
+[node name="Puglin" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_puglin")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+shape = SubResource("CapsuleShape3D_pug")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 0, 0, 0)
+
+[node name="Model" parent="VisualRoot" instance=ExtResource("2_zombie")]

@@ -1,0 +1,406 @@
+[gd_scene load_steps=12 format=3 uid="uid://hudmaster01"]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="2_bossbar"]
+[ext_resource type="PackedScene" path="res://scenes/ui/upgrade_selection.tscn" id="3_upgsel"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="4_pause"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
+bg_color = Color(0.08, 0.06, 0.09, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.45, 0.15, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
+bg_color = Color(0.12, 0.08, 0.07, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.2, 0.1, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.9, 0.22, 0.12, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill_ember"]
+bg_color = Color(0.15, 0.07, 0.04, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.55, 0.12, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill_shard"]
+bg_color = Color(0.04, 0.1, 0.14, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.75, 0.95, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd_fill"]
+bg_color = Color(0.95, 0.62, 0.15, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd_bg"]
+bg_color = Color(0.12, 0.09, 0.14, 0.95)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_announce"]
+bg_color = Color(0.09, 0.07, 0.12, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.8, 0.25, 0.95)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 16
+
+[node name="HUD" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hud")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="HealthContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/TopRow"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopRow/HealthContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopRow/HealthContainer/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopRow/HealthContainer/Margin/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TopRow/HealthContainer/Margin/VBox/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "❤ VITALITY"
+
+[node name="HPLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/HealthContainer/Margin/VBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "100 / 100"
+horizontal_alignment = 2
+
+[node name="HPBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopRow/HealthContainer/Margin/VBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+value = 100.0
+show_percentage = false
+
+[node name="RoomInfo" type="PanelContainer" parent="MarginContainer/VBoxContainer/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopRow/RoomInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopRow/RoomInfo/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="RoomLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/RoomInfo/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 17
+text = "TRIAL I: THE ASHEN COURT"
+horizontal_alignment = 1
+
+[node name="AspectLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/RoomInfo/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.72, 0.4, 0.95)
+theme_override_font_sizes/font_size = 12
+text = "ASPECT: TRIAL OF STEEL"
+horizontal_alignment = 1
+
+[node name="EnemiesLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/RoomInfo/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.25, 1)
+theme_override_font_sizes/font_size = 13
+text = "⚔ FOES REMAINING: 6"
+horizontal_alignment = 1
+
+[node name="Resources" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopRow"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="EmbersPill" type="PanelContainer" parent="MarginContainer/VBoxContainer/TopRow/Resources"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pill_ember")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopRow/Resources/EmbersPill"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="EmbersLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/Resources/EmbersPill/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.3, 1)
+theme_override_font_sizes/font_size = 15
+text = "🔥 0 EMBERS"
+
+[node name="ShardsPill" type="PanelContainer" parent="MarginContainer/VBoxContainer/TopRow/Resources"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pill_shard")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopRow/Resources/ShardsPill"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="ShardsLabel" type="Label" parent="MarginContainer/VBoxContainer/TopRow/Resources/ShardsPill/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.88, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "💎 50 SHARDS"
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="Abilities" type="HBoxContainer" parent="MarginContainer/BottomRow"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="StrikeCard" type="PanelContainer" parent="MarginContainer/BottomRow/Abilities"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/BottomRow/Abilities/StrikeCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/BottomRow/Abilities/StrikeCard/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/BottomRow/Abilities/StrikeCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "[LMB] STRIKE"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="MarginContainer/BottomRow/Abilities/StrikeCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 11
+text = "READY"
+horizontal_alignment = 1
+
+[node name="DashCard" type="PanelContainer" parent="MarginContainer/BottomRow/Abilities"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/BottomRow/Abilities/DashCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/BottomRow/Abilities/DashCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="MarginContainer/BottomRow/Abilities/DashCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.7, 1)
+theme_override_font_sizes/font_size = 11
+text = "[SPACE] DASH"
+horizontal_alignment = 1
+
+[node name="DashCD" type="ProgressBar" parent="MarginContainer/BottomRow/Abilities/DashCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cd_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cd_fill")
+value = 100.0
+show_percentage = false
+
+[node name="DashStatus" type="Label" parent="MarginContainer/BottomRow/Abilities/DashCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 10
+text = "READY"
+horizontal_alignment = 1
+
+[node name="BurstCard" type="PanelContainer" parent="MarginContainer/BottomRow/Abilities"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="Margin" type="MarginContainer" parent="MarginContainer/BottomRow/Abilities/BurstCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/BottomRow/Abilities/BurstCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="MarginContainer/BottomRow/Abilities/BurstCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65, 0.2, 1)
+theme_override_font_sizes/font_size = 11
+text = "[Q] EMBER BURST"
+horizontal_alignment = 1
+
+[node name="BurstCD" type="ProgressBar" parent="MarginContainer/BottomRow/Abilities/BurstCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cd_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cd_fill")
+value = 100.0
+show_percentage = false
+
+[node name="BurstStatus" type="Label" parent="MarginContainer/BottomRow/Abilities/BurstCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 10
+text = "READY!"
+horizontal_alignment = 1
+
+[node name="ReadyGlow" type="Panel" parent="MarginContainer/BottomRow/Abilities/BurstCard"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AnnouncementCenter" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnnouncementPanel" type="PanelContainer" parent="AnnouncementCenter"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_announce")
+
+[node name="VBox" type="VBoxContainer" parent="AnnouncementCenter/AnnouncementPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="AnnouncementCenter/AnnouncementPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
+theme_override_font_sizes/font_size = 24
+text = "★ CHAMBER SECURED ★"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="AnnouncementCenter/AnnouncementPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.75, 0.45, 1)
+theme_override_font_sizes/font_size = 15
+text = "PROCEED THROUGH THE CITADEL GATE"
+horizontal_alignment = 1
+
+[node name="BossHealthBar" parent="." instance=ExtResource("2_bossbar")]
+layout_mode = 1
+
+[node name="UpgradeSelection" parent="." instance=ExtResource("3_upgsel")]
+layout_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pause")]
+layout_mode = 1
